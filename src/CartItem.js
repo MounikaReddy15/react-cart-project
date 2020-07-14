@@ -13,11 +13,21 @@ class CartItem extends React.Component {
         // default state, an obj
         this.state = {
             price: 999,
-            title: 'Phone',
+            title: 'Mobile Phone',
             qty: 1,
             image: ''
         }
+        // binding in constructor 
+        // this.increaseQuantity= this.increaseQuantity.bind(this);
     }
+
+    // arrow func for binding
+    increaseQuantity = () => {
+        console.log('this', this.state);
+    }
+
+
+
     // for a class component to be react component we need to give it one method called render
     render () {
         // obj destructuring - want these properties from this obj
@@ -39,9 +49,24 @@ class CartItem extends React.Component {
                 <div className= "cart-item-actions">
                     {/* in curly braces we can write any js expression */}
                     {/* Buttons */}
-                    <img alt="increase" className="action-icons" src="https://image.flaticon.com/icons/svg/992/992651.svg"/>
-                    <img alt="decrease" className="action-icons" src="https://image.flaticon.com/icons/svg/992/992683.svg"/>
-                    <img alt="delete" className="action-icons" src="https://image.flaticon.com/icons/svg/3096/3096673.svg"/>
+                    <img 
+                        alt="increase" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/svg/992/992651.svg"
+                        // camel case coz its jsx
+                        // bind coz 'this' is lost when func called via variable
+                        // we can bind in constructor as well
+                        // onClick= {this.increaseQuantity.bind(this)}
+                        onClick= {this.increaseQuantity}
+                    />
+                    <img 
+                        alt="decrease" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/svg/992/992683.svg"/>
+                    <img 
+                        alt="delete" 
+                        className="action-icons" 
+                        src="https://image.flaticon.com/icons/svg/3096/3096673.svg"/>
                 </div>
                 </div>
 
