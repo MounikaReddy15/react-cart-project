@@ -20,35 +20,91 @@ class CartItem extends React.Component {
         }
         // binding in constructor 
         // this.increaseQuantity= this.increaseQuantity.bind(this);
+        // this.testing();
     }
+
+    // testing() {
+    //     // using promise to simulate an api call
+    //     const promise = new Promise((resolve, reject) => {
+    //         setTimeout(() => {
+    //             resolve('done');
+    //         },5000);
+    //     })
+    //     // passing a callback
+    //     promise.then(() => {
+    //         // setS acts like sync call
+    //         this.setState({qty: this.state.qty+10});
+    //         this.setState({qty: this.state.qty+10});
+    //         this.setState({qty: this.state.qty+10});
+    //         console.log('state', this.state)
+    //     });
+    // }
+
 
     // arrow func for binding
     increaseQuantity = () => {
         // this.state.qty+=1;
-        console.log('this', this.state);
+        // console.log('this', this.state);
         // this func is inherited from component class in react
         // there are two ways to call this func
         // to change/modify our state
         // calling setState triggers a re-render of our component
         // setState form 1, by giving it an obj
+        // no matter how many times we call setState it will render only once coz of batching
         // this.setState({
-        //     // changes we want to make
+        //      changes we want to make
         //     qty: this.state.qty+1
         // });
+        // this.setState({
+        //  changes we want to make
+        // qty: this.state.qty+5
+        // });
 
-        // setState form 2
+        // setState form 2 - if prevState required use this
+            // this.setState((prevState) => {
+            //     return {
+            //         qty: prevState.qty+1
+            //     }
+            // });
+            // this.setState((prevState) => {
+            //     return {
+            //         qty: prevState.qty+1
+            //     }
+            // });
             this.setState((prevState) => {
                 return {
                     qty: prevState.qty+1
                 }
+            }, () => {
+                // callback when state call is finished
+                console.log('this.state', this.state);
             });
-        
+            
+               
+            
     }
 
+    decreaseQuantity = () => {
+        console.log('this', this.state);
 
+        // destructuring
+        const {qty} = this.state;
+        if(qty === 0) {
+            return;
+        }
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty-1
+            }
+        },() => {
+            console.log('this.state', this.state);
+        });
+    }
 
     // for a class component to be react component we need to give it one method called render
     render () {
+        
+        console.log('render');
         // obj destructuring - want these properties from this obj
         const {price,title,qty} = this.state;
 
@@ -77,15 +133,20 @@ class CartItem extends React.Component {
                         // we can bind in constructor as well
                         // onClick= {this.increaseQuantity.bind(this)}
                         onClick= {this.increaseQuantity}
+                        
                     />
                     <img 
                         alt="decrease" 
                         className="action-icons" 
-                        src="https://image.flaticon.com/icons/svg/992/992683.svg"/>
+                        src="https://image.flaticon.com/icons/svg/992/992683.svg"
+                        onClick= {this.decreaseQuantity}
+                    />
                     <img 
                         alt="delete" 
                         className="action-icons" 
-                        src="https://image.flaticon.com/icons/svg/3096/3096673.svg"/>
+                        src="https://image.flaticon.com/icons/svg/3096/3096673.svg"
+                    />
+                   
                 </div>
                 </div>
 
