@@ -7,10 +7,11 @@ import React from 'react';
 class CartItem extends React.Component {
     // for defining a state
     constructor() {
-        // whenevr we r using const'or in our classes we need to call super, to basically call const'or of parent cls,
-        // if we are inheriting
+        // whenevr we r using const'or in our classes we need to call super, to basically call const'or of parent cls, if we are inheriting
+        // whenever we are inheriting from another class, we are inheriting from component class in react, we need to first call the const'or
+        //  of that parent, if we use constructor
         super();
-        // default state, an obj
+        // default state, it is an obj
         this.state = {
             price: 999,
             title: 'Mobile Phone',
@@ -23,7 +24,25 @@ class CartItem extends React.Component {
 
     // arrow func for binding
     increaseQuantity = () => {
+        // this.state.qty+=1;
         console.log('this', this.state);
+        // this func is inherited from component class in react
+        // there are two ways to call this func
+        // to change/modify our state
+        // calling setState triggers a re-render of our component
+        // setState form 1, by giving it an obj
+        // this.setState({
+        //     // changes we want to make
+        //     qty: this.state.qty+1
+        // });
+
+        // setState form 2
+            this.setState((prevState) => {
+                return {
+                    qty: prevState.qty+1
+                }
+            });
+        
     }
 
 
@@ -44,8 +63,8 @@ class CartItem extends React.Component {
                 {/* <div style = {{ fontSize:25}}> Phone </div>
                 <div style = {{ fontSize:25}}> {this.state.title} </div> */}
                 <div style = {{ fontSize:25}}> {title} </div>
-                <div style = {{ color: '#777'}}> {price} </div>
-                <div style = {{ color: '#777' }}> {qty} </div>
+                <div style = {{ color: '#777'}}>Rs {price} </div>
+                <div style = {{ color: '#777' }}>Qty: {qty} </div>
                 <div className= "cart-item-actions">
                     {/* in curly braces we can write any js expression */}
                     {/* Buttons */}
