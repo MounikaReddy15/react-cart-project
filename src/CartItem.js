@@ -6,22 +6,22 @@ import React from 'react';
 // cartitem(class component) inheriting from a class called component inside the react package
 class CartItem extends React.Component {
     // for defining a state
-    constructor() {
-        // whenevr we r using const'or in our classes we need to call super, to basically call const'or of parent cls, if we are inheriting
-        // whenever we are inheriting from another class, we are inheriting from component class in react, we need to first call the const'or
-        //  of that parent, if we use constructor
-        super();
-        // default state, it is an obj
-        this.state = {
-            price: 999,
-            title: 'Mobile Phone',
-            qty: 1,
-            image: ''
-        }
-        // binding in constructor 
-        // this.increaseQuantity= this.increaseQuantity.bind(this);
-        // this.testing();
-    }
+    // constructor() {
+    //     // whenevr we r using const'or in our classes we need to call super, to basically call const'or of parent cls, if we are inheriting
+    //     // whenever we are inheriting from another class, we are inheriting from component class in react, we need to first call the const'or
+    //     //  of that parent, if we use constructor
+    //     super();
+    //     // default state, it is an obj
+    //     this.state = {
+    //         price: 999,
+    //         title: 'Mobile Phone',
+    //         qty: 1,
+    //         image: ''
+    //     }
+    //     // binding in constructor 
+    //     // this.increaseQuantity= this.increaseQuantity.bind(this);
+    //     // this.testing();
+    // }
 
     // testing() {
     //     // using promise to simulate an api call
@@ -104,14 +104,19 @@ class CartItem extends React.Component {
     // for a class component to be react component we need to give it one method called render
     render () {
         
-        console.log('render');
+        // console.log('render');
+        console.log('this.props', this.props);
         // obj destructuring - want these properties from this obj
-        const {price,title,qty} = this.state;
+        // const {price,title,qty} = this.state;
+        // product is an obj with these properties
+        const {price,title,qty} = this.props.product;
+
 
         // this method shud return some jsx, that basically describes the ui for that component
         return (
             // jsx code
             <div className = "cart-item">
+                {this.props.jsx}
                 <div className="left-block">
                 <img style = {styles.image}/>
                 </div>
