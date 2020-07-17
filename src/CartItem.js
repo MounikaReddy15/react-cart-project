@@ -42,7 +42,7 @@ class CartItem extends React.Component {
 
 
     // arrow func for binding
-    increaseQuantity = () => {
+    // increaseQuantity = () => {
         // this.state.qty+=1;
         // console.log('this', this.state);
         // this func is inherited from component class in react
@@ -71,52 +71,56 @@ class CartItem extends React.Component {
             //         qty: prevState.qty+1
             //     }
             // });
-            this.setState((prevState) => {
-                return {
-                    qty: prevState.qty+1
-                }
-            }, () => {
-                // callback when state call is finished
-                console.log('this.state', this.state);
-            });
+    //         this.setState((prevState) => {
+    //             return {
+    //                 qty: prevState.qty+1
+    //             }
+    //         }, () => {
+    //             // callback when state call is finished
+    //             console.log('this.state', this.state);
+    //         });
             
                
             
-    }
+    // }
 
-    decreaseQuantity = () => {
-        console.log('this', this.state);
+    // decreaseQuantity = () => {
+    //     console.log('this', this.state);
 
-        // destructuring
-        const {qty} = this.state;
-        if(qty === 0) {
-            return;
-        }
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty-1
-            }
-        },() => {
-            console.log('this.state', this.state);
-        });
-    }
+    //     // destructuring
+    //     const {qty} = this.state;
+    //     if(qty === 0) {
+    //         return;
+    //     }
+    //     this.setState((prevState) => {
+    //         return {
+    //             qty: prevState.qty-1
+    //         }
+    //     },() => {
+    //         console.log('this.state', this.state);
+    //     });
+    // }
 
     // for a class component to be react component we need to give it one method called render
     render () {
         
-        // console.log('render');
-        console.log('this.props', this.props);
+        // console.log('render');   ye print kar raha hai waha par line 108 console me jo props details print ho raha hai wo yaha se ho raha hai aurpahg me jo show hota hai wo return ke andar ka code hota hai
+       console.log('this.props', this.props);  // now see on console only jsx aayega
         // obj destructuring - want these properties from this obj
         // const {price,title,qty} = this.state;
         // product is an obj with these properties
         const {price,title,qty} = this.props.product;
-
+        const{product, 
+            onIncreaseQuantity, 
+            onDecreaseQuantity, 
+            onDeleteProduct
+        } = this.props;
 
         // this method shud return some jsx, that basically describes the ui for that component
         return (
             // jsx code
             <div className = "cart-item">
-                {this.props.jsx}
+                {/* {this.props.jsx}  */}
                 <div className="left-block">
                 <img style = {styles.image}/>
                 </div>
@@ -137,19 +141,23 @@ class CartItem extends React.Component {
                         // bind coz 'this' is lost when func called via variable
                         // we can bind in constructor as well
                         // onClick= {this.increaseQuantity.bind(this)}
-                        onClick= {this.increaseQuantity}
-                        
+                        // onClick= {this.increaseQuantity}
+                        // calling the func when user clicks
+                        // onClick= {() => this.props.onIncreaseQuantity(this.props.product)}
+                        onClick= {() => onIncreaseQuantity(product)}
                     />
                     <img 
                         alt="decrease" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/992/992683.svg"
-                        onClick= {this.decreaseQuantity}
+                        // onClick= {this.decreaseQuantity}
+                        onClick= {() => onDecreaseQuantity(product)}
                     />
                     <img 
                         alt="delete" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/svg/3096/3096673.svg"
+                        onClick= {() => onDeleteProduct(product.id)}
                     />
                    
                 </div>

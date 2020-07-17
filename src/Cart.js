@@ -42,6 +42,48 @@ class Cart extends React.Component {
         }
     }
 
+    // product - which product qty we want to inc
+    handleIncreaseQuantity = (product) => {
+        console.log('hey inc the qty of product', product);
+        const {products} = this.state;
+        // indexing to find that particular prod which we want to inc
+        const index = products.indexOf(product);
+
+        products[index].qty += 1;
+        // obj
+        this.setState({
+            // products in state to products in this func
+            // products: products
+            //  we can use shorthand property
+            products
+        })
+    }
+
+    handleDecreaseQuantity = (product) => {
+        console.log('hey dec the qty of product', product);
+        const {products} = this.state;
+        const index = products.indexOf(product);
+        if( products[index].qty === 0) {
+           return;
+        }
+        products[index].qty -= 1;
+        this.setState({
+             
+            products
+        })
+    }
+
+    handleDeleteProduct = (id) => {
+       
+        const {products} = this.state;
+        // this will return an array containing products whose id is not equal to the id that is passed [{}]
+        const items = products.filter((item) => item.id !== id);
+    
+        this.setState({
+            products: items
+        
+        })
+    }
     // for a class component to be react component we need to give it one method called render
     render () {
        
@@ -64,11 +106,15 @@ class Cart extends React.Component {
                 {products.map((product) => {
                     return <CartItem 
                             product= {product} 
-                            key={product.id} 
+                            key={product.id}
+                            onIncreaseQuantity = {this.handleIncreaseQuantity}
+                            onDecreaseQuantity = {this.handleDecreaseQuantity}
+                            onDeleteProduct    = {this.handleDeleteProduct}
+
                             // we can basically pass anything
-                            func = {()=> console.log('hi')}
-                            isloggedin={false}
-                            jsx={<h1>Test</h1>}
+                            // func = {()=> console.log('hi')}
+                            // isloggedin={true}
+                            // jsx={<h1>Test</h1>} this o
                             // comp={<CartItem/>}
                             />
                 })}
