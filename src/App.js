@@ -21,21 +21,21 @@ class App extends React.Component {
               price: 99,
               title: 'Watch',
               qty: 1,
-              image: '',
+              image: 'https://images.unsplash.com/photo-1525342306245-c6a1e32087ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
               id:1
           },
           {
               price: 999,
               title: 'Mobile Phone',
               qty: 10,
-              image: '',
+              image: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80',
               id:2
           },
           {
               price: 999,
               title: 'Laptop',
               qty: 4,
-              image: '',
+              image: 'https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=80',
               id:3
           }
       ]
@@ -94,6 +94,16 @@ getCartCount = () => {
 
   return count;
 }
+
+getCartTotal = () => {
+  const {products} = this.state;
+  let cartTotal = 0;
+  products.map((product) => {
+    cartTotal += product.qty * product.price
+  })
+
+  return cartTotal;
+}
   render () {
     // getting products from state
     const {products} = this.state;
@@ -107,6 +117,7 @@ getCartCount = () => {
       onDecreaseQuantity = {this.handleDecreaseQuantity}
       onDeleteProduct    = {this.handleDeleteProduct}
       />
+      <div style = {{padding: 10, fontSize: 20}}> TOTAL: {this.getCartTotal()} </div>
     </div>
   );
 }

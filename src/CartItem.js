@@ -121,7 +121,8 @@ import React from 'react';
             <div className = "cart-item">
                 {/* {this.props.jsx}  */}
                 <div className="left-block">
-                <img style = {styles.image}/>
+                    {/* img is a property in product obj */}
+                <img style = {styles.image} src = {product.image}/>
                 </div>
                 <div className="right-block">
                 {/* <div style = {{ fontSize:25}}> Phone </div>
