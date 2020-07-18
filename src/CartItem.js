@@ -4,7 +4,7 @@
 import React from 'react';
 
 // cartitem(class component) inheriting from a class called component inside the react package
-class CartItem extends React.Component {
+// class CartItem extends React.Component {
     // for defining a state
     // constructor() {
     //     // whenevr we r using const'or in our classes we need to call super, to basically call const'or of parent cls, if we are inheriting
@@ -101,20 +101,19 @@ class CartItem extends React.Component {
     //     });
     // }
 
-    // for a class component to be react component we need to give it one method called render
-    render () {
+    const CartItem = (props) => {
         
         // console.log('render');   ye print kar raha hai waha par line 108 console me jo props details print ho raha hai wo yaha se ho raha hai aurpahg me jo show hota hai wo return ke andar ka code hota hai
-       console.log('this.props', this.props);  // now see on console only jsx aayega
+    //    console.log('this.props', this.props);  // now see on console only jsx aayega
         // obj destructuring - want these properties from this obj
         // const {price,title,qty} = this.state;
         // product is an obj with these properties
-        const {price,title,qty} = this.props.product;
+        const {price,title,qty} = props.product;
         const{product, 
             onIncreaseQuantity, 
             onDecreaseQuantity, 
             onDeleteProduct
-        } = this.props;
+        } = props;
 
         // this method shud return some jsx, that basically describes the ui for that component
         return (
@@ -167,7 +166,7 @@ class CartItem extends React.Component {
         );
     }
 
-}
+
 
 // style obj
 // we can give diff properties to obj
