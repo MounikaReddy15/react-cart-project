@@ -98,9 +98,13 @@ getCartCount = () => {
 getCartTotal = () => {
   const {products} = this.state;
   let cartTotal = 0;
-  products.map((product) => {
+  products.map(product => {
+    if(product.qty>0) {
     cartTotal += product.qty * product.price
-  })
+
+  }
+  return '';
+  });
 
   return cartTotal;
 }
