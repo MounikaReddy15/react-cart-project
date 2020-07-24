@@ -104,13 +104,26 @@ handleIncreaseQuantity = (product) => {
   // indexing to find that particular prod which we want to inc
   const index = products.indexOf(product);
 
-  products[index].qty += 1;
-  // obj
-  this.setState({
-      // products in state to products in this func
-      // products: products
-      //  we can use shorthand property
-      products
+  // products[index].qty += 1;
+  // // obj
+  // this.setState({
+  //     // products in state to products in this func
+  //     // products: products
+  //     //  we can use shorthand property
+  //     products
+  // })
+
+  // getting the ref of the particular prod
+  const docRef = this.db.collection('products').doc(products[index].id);
+  docRef
+  .update({
+    qty: products[index].qty+1
+  })
+  .then(() => {
+    console.log('updated successfully')
+  })
+  .catch((error) => {
+    console.log('Error: ', error)
   })
 }
 
@@ -189,7 +202,7 @@ this.db
     <div className="App">
       {/* passing a prop count */}
       <Navbar count = {this.getCartCount()}/>
-      <button onClick = {this.addProduct} style={{padding:20, fontSize:20}}> Add a Product</button>
+      {/* <button onClick = {this.addProduct} style={{padding:20, fontSize:20}}> Add a Product</button> */}
       <Cart
       products = {products}
       onIncreaseQuantity = {this.handleIncreaseQuantity}
